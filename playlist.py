@@ -6,9 +6,22 @@ api_key = 'AIzaSyBwNK7uOPd4ygHqEkslmb1mLwTeKXNQod4'
 
 youtube = build('youtube', 'v3', developerKey=api_key)
 
+#url = 'https://www.youtube.com/watch?v=mRD0-GxqHVo&list=PLMC9KNkIncKtPzgY-5rmhvj7fax8fdxoj&ab_channel=GlassAnimalsVEVO'
+url = "https://www.youtube.com/playlist?list=PLBOh8f9FoHHjOz0vGrD20WcTtJar-LOrw"
+#url = "https://www.youtube.com / playlist?list = PLqM7alHXFySE71A2bQdYp37vYr0aReknt"
+url = url.split("list=")
+# itt még lehet & alapján is splitelni esetleg ha fura playlistet kap
+playlist_id = url[1]
+
+#playlist = pafy.get_playlist(url)
+#i_d = playlist["playlist_id"]
+#playlist_id = playlist["playlist_id"]
+
+print(playlist_id)
+
 #playlist_id = 'PL8uoeex94UhHFRew8gzfFJHIpRFWyY4YW'
 #playlist_id = 'RDGMEMHDXYb1_DDSgDsobPsOFxpA'
-playlist_id = 'PLMC9KNkIncKtPzgY-5rmhvj7fax8fdxoj'
+#playlist_id = 'PLMC9KNkIncKtPzgY-5rmhvj7fax8fdxoj'
 
 #https://www.youtube.com/watch?v=GUqYdsBjZxg&list=RDGMEMHDXYb1_DDSgDsobPsOFxpA&start_radio=1&rv=vqPIvA9ATO4&ab_channel=JackHarlow
 
@@ -50,12 +63,14 @@ while True:
         vid_id = item['id']
         yt_link = f'https://youtu.be/{vid_id}'
 
-        videos.append(
-            {
-                'views': int(vid_views),
-                'url': yt_link
-            }
-        )
+        videos.append(yt_link)
+
+        # videos.append(
+        #     {
+        #         'views': int(vid_views),
+        #         'url': yt_link
+        #     }
+        # )
 
     nextPageToken = pl_response.get('nextPageToken')
 
@@ -67,4 +82,5 @@ while True:
 i = 0
 for video in videos[:10]:
     i += 1
-    print(i, video['url'], video['views'])
+    print(i, video)
+    # print(i, video['url'], video['views'])
